@@ -1,0 +1,15 @@
+[project]
+name = "real-vs-ai-generated-image-classification-and-detection"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "opencv-python>=4.12.0.88",
+    "streamlit>=1.48.1",
+    "tensorflow>=2.20.0",
+    "flask>=3.0.0",
+    "flask-cors>=4.0.0",
+    "pillow>=10.4.0",
+    "numpy>=1.26.0",
+]
