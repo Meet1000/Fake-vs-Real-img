@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reality Defender - AI Deepfake Detection</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background">
+        <div class="gradient-bg"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>Reality Defender</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#features" class="nav-link">Features</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">AI-Powered</span>
+                    <br>Deepfake Detection
+                </h1>
+                <p class="hero-subtitle">
+                    Advanced artificial intelligence to detect manipulated images and videos with industry-leading accuracy
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">99.8%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">< 2s</span>
+                        <span class="stat-label">Detection Time</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Available</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="container">
+                <div class="upload-card">
+                    <div class="upload-header">
+                        <h2>Upload Media for Analysis</h2>
+                        <p>Drag and drop your images or videos, or click to browse files</p>
+                    </div>
+
+                    <!-- File Type Selector -->
+                    <div class="file-type-selector">
+                        <button class="type-btn active" data-type="image">
+                            <i class="fas fa-image"></i>
+                            <span>Images</span>
+                        </button>
+                        <button class="type-btn" data-type="video">
+                            <i class="fas fa-video"></i>
+                            <span>Videos</span>
+                        </button>
+                    </div>
+
+                    <!-- Upload Area -->
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-zone" id="uploadZone">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h3>Drop your file here</h3>
+                            <p>or click to browse</p>
+                            <div class="supported-formats">
+                                <span class="format-badge">JPG</span>
+                                <span class="format-badge">PNG</span>
+                                <span class="format-badge">WEBP</span>
+                                <span class="format-badge">MP4</span>
+                                <span class="format-badge">AVI</span>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*,video/*" hidden>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="preview-section hidden" id="previewSection">
+                        <div class="preview-container">
+                            <div class="preview-media">
+                                <img id="previewImage" class="preview-img hidden" alt="Preview">
+                                <video id="previewVideo" class="preview-video hidden" controls></video>
+                                <div class="preview-overlay">
+                                    <button class="analyze-btn" id="analyzeBtn">
+                                        <i class="fas fa-search"></i>
+                                        Analyze Media
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section hidden" id="resultsSection">
+            <div class="container">
+                <div class="results-card">
+                    <div class="results-header">
+                        <h2>Analysis Results</h2>
+                        <div class="result-status" id="resultStatus">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Analyzing...</span>
+                        </div>
+                    </div>
+
+                    <div class="results-content">
+                        <div class="result-main">
+                            <div class="result-icon" id="resultIcon">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <div class="result-text">
+                                <h3 id="resultLabel">Processing...</h3>
+                                <p id="resultDescription">Please wait while we analyze your media</p>
+                            </div>
+                        </div>
+
+                        <div class="confidence-meter">
+                            <div class="meter-label">Confidence Score</div>
+                            <div class="meter-container">
+                                <div class="meter-bar">
+                                    <div class="meter-fill" id="confidenceBar"></div>
+                                </div>
+                                <span class="meter-value" id="confidenceValue">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="result-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Real Probability:</span>
+                                <span class="detail-value" id="realProb">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fake Probability:</span>
+                                <span class="detail-value" id="fakeProb">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Analysis Time:</span>
+                                <span class="detail-value" id="analysisTime">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="btn btn-secondary" id="newAnalysisBtn">
+                            <i class="fas fa-plus"></i>
+                            New Analysis
+                        </button>
+                        <button class="btn btn-primary" id="downloadReportBtn">
+                            <i class="fas fa-download"></i>
+                            Download Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About Reality Defender</h2>
+                    <p>Cutting-edge AI technology for detecting manipulated media</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Advanced AI</h3>
+                        <p>Powered by state-of-the-art deep learning models trained on millions of real and fake media samples.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Lightning Fast</h3>
+                        <p>Get results in under 2 seconds with our optimized detection algorithms and cloud infrastructure.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure & Private</h3>
+                        <p>Your media is processed securely and never stored permanently. We prioritize your privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Key Features</h2>
+                    <p>Everything you need for reliable deepfake detection</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3>Image Detection</h3>
+                        <p>Detect manipulated photos with high accuracy across multiple formats including JPG, PNG, and WEBP.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3>Video Analysis</h3>
+                        <p>Analyze video content for deepfake detection, supporting MP4, AVI, MOV, and other popular formats.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Confidence Scoring</h3>
+                        <p>Get detailed confidence scores and probability breakdowns for each analysis result.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Optimized</h3>
+                        <p>Fully responsive design that works seamlessly on desktop, tablet, and mobile devices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Reality Defender</span>
+                </div>
+                <p>&copy; 2024 Reality Defender. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Analyzing your media...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
